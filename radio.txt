@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAD LAB CHECKBOX EXAMPLE"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select your products"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PIZZA"
+        android:layout_below="@id/textView2"
+        android:layout_marginTop="22dp"
+        android:layout_centerInParent="true"/>
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COFFEE"
+        android:layout_below="@id/checkBox"
+        android:layout_marginTop="22dp"
+        android:layout_centerInParent="true" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BURGER"
+        android:layout_below="@id/checkBox2"
+        android:layout_marginTop="22dp"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="COMPLETE PURCHASE"
+        android:layout_below="@id/checkBox3"
+        android:layout_marginTop="42dp"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"/>
+</RelativeLayout>
+
+
+
+package com.example.checkbox
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    lateinit var pizza:CheckBox
+    lateinit var coffee:CheckBox
+    lateinit var burger:CheckBox
+    lateinit var button: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        pizza=findViewById(R.id.checkBox)
+        coffee=findViewById(R.id.checkBox2)
+        burger=findViewById(R.id.checkBox3)
+        button=findViewById(R.id.button)
+        button.setOnClickListener{
+            var totalAmount:Int=0
+            val result=StringBuilder()
+            result.append("Selected Items: ")
+            if(pizza.isChecked) {
+                result.append("Pizza-100rs")
+                totalAmount+=100
+            }
+            if(coffee.isChecked) {
+                result.append("Coffee-50rs")
+                totalAmount+=50
+            }
+            if(burger.isChecked) {
+                result.append("Burger-120rs")
+                totalAmount+=120
+            }
+            result.append(" Total: "+totalAmount+"rs")
+            Toast.makeText(applicationContext,result.toString(),Toast.LENGTH_SHORT).show()
+        }
+    }
+}
