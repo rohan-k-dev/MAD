@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heading"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:layout_marginTop="24sp"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Radiobutton1"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Radiobutton2"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Radiobutton3"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <RadioButton
+        android:id="@+id/radioButton4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Radiobutton4"
+        android:textStyle="bold"
+        android:textSize="24sp"/>
+
+    <RadioButton
+        android:id="@+id/radioButton5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Radiobutton5"
+        android:textStyle="bold"
+        android:textSize="24sp"
+         />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup"/>
+</android.support.constraint.ConstraintLayout>
+
+
+Inside strings.xml
+
+<resources>
+    <string name="app_name">radio</string>
+    <string name="heading">Choose a course</string>
+    <string name="Radiobutton1">Data Mining</string>
+    <string name="Radiobutton2">Cloud Computing</string>
+    <string name="Radiobutton3">Computer Networks 1</string>
+    <string name="Radiobutton4">Software Engineering</string>
+    <string name="Radiobutton5">MAD</string>
+    <string name="submit_button">Submit</string>
+</resources>
+
+
+
+package com.example.radio
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    var radioGroup: RadioGroup? = null
+    lateinit var radioButton: RadioButton
+    private lateinit var button: Button
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        title= "RadioGroup in kotlin"
+        radioGroup=findViewById(R.id.radiogroup)
+        button=findViewById(R.id.button)
+        button.setOnClickListener{
+            val selectedOption: Int = radioGroup!!.checkedRadioButtonId
+
+            radioButton=findViewById(selectedOption)
+            Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
+        }
+
+    }
+}
