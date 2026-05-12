@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="select your date"
+        android:layout_centerInParent="true"
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:textColor="@color/purple_200"
+        android:padding="11dp"/>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+package com.example.datepickker
+
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.os.Build
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.annotation.RequiresApi
+import android.widget.Button
+import android.widget.DatePicker
+import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var btndatepicker: Button
+    private lateinit var textselectedate:TextView
+    private var calendar= Calendar.getInstance()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        btndatepicker=findViewById(R.id.button)
+        textselectedate=findViewById(R.id.textView)
+        btndatepicker.setOnClickListener{
+            showDatePicker()
+        }
+    }
+
+    private fun showDatePicker() {
+        val datePickerDialog=DatePickerDialog(
+            this,{ _, year: Int, monthOfYear:Int, dayOfMonth: Int ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year,monthOfYear,dayOfMonth)
+                val dateFormat= SimpleDateFormat("dd/MM/yyyy",Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+                textselectedate.text="Selected Date: $formattedDate"
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        )
+        datePickerDialog.show()
+    }
+}
