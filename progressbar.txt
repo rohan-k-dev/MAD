@@ -1,0 +1,87 @@
+package com.example.myapplication
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Handler
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
+
+class MainActivity : AppCompatActivity() {
+
+    private var i = 0
+    private val handler = Handler()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        val textView = findViewById<TextView>(R.id.textView)
+        val button = findViewById<Button>(R.id.button)
+
+        button.setOnClickListener {
+
+            i = 0   // reset
+
+            Thread {
+                while (i <= 100) {
+
+                    handler.post {
+                        progressBar.progress = i
+                        textView.text = i.toString()
+                    }
+
+                    i++
+                    Thread.sleep(100)
+                }
+            }.start()
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="100"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="142dp"
+        android:layout_height="124dp"
+        android:text="0"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="312dp"
+        android:text="Start Progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
+
+</android.support.constraint.ConstraintLayout>

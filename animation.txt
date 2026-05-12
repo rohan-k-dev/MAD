@@ -1,0 +1,201 @@
+Instructions:
+Create anim folder
+res → Right Click → New → Android Resource Directory → type = anim , directory name = anim
+
+create all animations files
+anim -> new -> animation resource file -> give appropriate name
+
+
+✅ 1. activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:text="Animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/fade_in" android:text="Fade In"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/fade_out" android:text="Fade Out"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/zoom_in" android:text="Zoom In"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/zoom_out" android:text="Zoom Out"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/slide_down" android:text="Slide Down"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/slide_up" android:text="Slide Up"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/bounce" android:text="Bounce"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/rotate" android:text="Rotate"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+✅ 2. MainActivity.kt
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val textView = findViewById<TextView>(R.id.textView)
+
+        findViewById<Button>(R.id.fade_in).setOnClickListener {
+            textView.visibility = View.VISIBLE
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.fade_out).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+            textView.startAnimation(animation)
+            Handler().postDelayed({ textView.visibility = View.GONE }, 1000)
+        }
+
+        findViewById<Button>(R.id.zoom_in).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.zoom_out).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.zoom_out)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.slide_down).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.slide_down)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.slide_up).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.bounce).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
+            textView.startAnimation(animation)
+        }
+
+        findViewById<Button>(R.id.rotate).setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+            textView.startAnimation(animation)
+        }
+    }
+}
+
+
+✅ 3. Animation XML Files (res/anim)
+
+fade_in.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator">
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0" />
+</set>
+
+fade_out.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator">
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.1" />
+</set>
+
+zoom_in.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <scale
+        android:duration="1000"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1.5"
+        android:toYScale="1.5"/>
+</set>
+
+zoom_out.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <scale
+        android:duration="1000"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="0.5"
+        android:toYScale="0.5"/>
+</set>
+
+slide_down.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1000"
+        android:fromYDelta="-100%"
+        android:toYDelta="0"/>
+</set>
+
+slide_up.xml
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1000"
+        android:fromYDelta="0"
+        android:toYDelta="-100%"/>
+</set>
+
+bounce.xml
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:fillAfter="true">
+
+    <translate
+        android:fromYDelta="100%"
+        android:toYDelta="-20%"
+        android:duration="300"/>
+
+    <translate
+        android:startOffset="500"
+        android:fromYDelta="-20%"
+        android:toYDelta="10%"
+        android:duration="150"/>
+
+    <translate
+        android:startOffset="1000"
+        android:fromYDelta="10%"
+        android:toYDelta="0"
+        android:duration="100"/>
+</set>
+
+rotate.xml
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:pivotX="50%"
+    android:pivotY="50%"/>
