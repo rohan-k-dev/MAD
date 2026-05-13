@@ -1,0 +1,100 @@
+
+1. Replace:
+   alert.setIcon(R.drawable.warning)
+
+WITH:
+alert.setIcon(android.R.drawable.ic_dialog_alert)
+
+2. strings.xml location:
+   app > res > values > strings.xml
+
+
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="exit"
+        android:textStyle="normal|bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:text="@string/exit"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:layout_marginBottom="68dp"
+        android:textStyle="normal|bold"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/click_over_button_to_exit"/>
+</RelativeLayout>
+
+
+
+
+Strings.xml------->
+<resources>
+    <string name="app_name">alertdialog</string>
+    <string name="exit">exit</string>
+    <string name="click_over_button_to_exit">exit</string>
+</resources>
+
+
+
+
+
+
+
+
+
+
+package com.example.alertdialog
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.view.View
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+    fun exit(view: View) {
+        val alert=AlertDialog.Builder(this)
+        alert.setTitle("Confirm Exit")
+        alert.setIcon(R.drawable.warning)
+        alert.setMessage("are you sure you want to exit?")
+        alert.setCancelable(false)
+        alert.setPositiveButton("yes") {_,_->
+            finish()
+        }
+        alert.setNegativeButton("No") {_,_->
+            Toast.makeText(this,"you clicked on N0",Toast.LENGTH_LONG).show()
+
+        }
+        alert.create().show()
+    }
+}
+
+
+
+
+
+
+Add warning.xml alsoo
