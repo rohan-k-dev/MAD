@@ -1,39 +1,96 @@
-alertdialog.txt        -> Alert Dialog example (popup dialog with buttons)
+========================================
+ANDROID PROGRAM FILE COLLECTION
+========================================
 
-animation.txt          -> Animation program (updated version)
+Description:
+This repository contains various Android Studio example programs.
+Some files may appear repeated with an extra letter at the end
+(example: image.txt and imagee.txt).
 
-autocomplete.txt       -> AutoCompleteTextView example
+These repeated files are usually:
+• Updated versions
+• Modified examples
+• Alternative question solutions
+• Corrected versions of previous files
 
-canvas.txt             -> Canvas drawing example
+Use the latest or updated file wherever necessary.
 
-checkbox.txt           -> Checkbox example (updated/renamed from radio.txt)
 
-custom_checkbox.txt    -> Custom Checkbox UI example
+========================================
+FILE LIST AND DESCRIPTION
+========================================
 
-customtoast.txt        -> Custom Toast message example
+alertdialog.txt
+-> Alert Dialog example (popup dialog with buttons)
 
-datepicker.txt         -> Date Picker Dialog example (updated version)
+alertdialogg.txt
+-> Updated/Modified Alert Dialog example
 
-image.txt              -> ImageView/Image handling example (updated version)
+animation.txt
+-> Animation program example
 
-intent.txt             -> Explicit, Implicit Intent and Passing Data examples
+autocomplete.txt
+-> AutoCompleteTextView example
 
-menu.txt               -> Options Menu example
+canvas.txt
+-> Canvas drawing example
 
-progressbar.txt        -> Progress Bar example
+checkbox.txt
+-> Checkbox example
 
-progressbarr.txt       -> Updated/Renamed Progress Bar example
+custom_checkbox.txt
+-> Custom Checkbox UI example
 
-radio.txt              -> Radio Button example
+customtoast.txt
+-> Custom Toast message example
 
-shared.txt             -> SharedPreferences example (updated version)
+dateandtime.txt
+-> Combined Date Picker and Time Picker example
 
-sharedd.txt            -> Updated/Renamed SharedPreferences example
+datepicker.txt
+-> Date Picker Dialog example
 
-spinner.txt            -> Spinner dropdown example
+image.txt
+-> ImageView/Image handling example
 
-sqlite.txt             -> SQLite Database example
+imagee.txt
+-> Updated/Alternative Image example
 
-timepicker.txt         -> Time Picker Dialog example
+intent.txt
+-> Intent example (Explicit and Implicit Intent)
 
-toggle.txt             -> Toggle Button example
+intentt.txt
+-> Updated Intent example with data passing
+
+menu.txt
+-> Options Menu example
+
+progressbar.txt
+-> Progress Bar example
+
+progressbarr.txt
+-> Updated/Alternative Progress Bar example
+
+radio.txt
+-> Radio Button example
+
+shared.txt
+-> SharedPreferences example
+
+sharedd.txt
+-> Updated/Alternative SharedPreferences example
+
+spinner.txt
+-> Spinner dropdown example
+
+sqlite.txt
+-> SQLite Database example
+
+t1.txt
+-> Sample/Test text file
+
+timepicker.txt
+-> Time Picker Dialog example
+
+toggle.txt
+-> Toggle Button example
