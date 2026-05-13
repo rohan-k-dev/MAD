@@ -1,0 +1,292 @@
+========================================
+1. DATE PICKER PROGRAM
+========================================
+
+Question:
+Create a DatePicker application to select a date from the calendar and display the selected date using Toast message.
+
+
+-------------------------------
+activity_main.xml
+-------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+-------------------------------
+MainActivity.kt
+-------------------------------
+
+package com.example.datepicker1
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.DatePicker
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+
+        datePicker.setOnDateChangedListener { view, year, month, day ->
+
+            val m = month + 1
+
+            Toast.makeText(
+                applicationContext,
+                "Date Is: $day/$m/$year",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+
+
+========================================
+2. TIME PICKER PROGRAM
+========================================
+
+Question:
+Create a TimePicker application to select time and display the selected hour and minute using Toast message.
+
+
+-------------------------------
+activity_main.xml
+-------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<TimePicker xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+-------------------------------
+MainActivity.kt
+-------------------------------
+
+package com.example.timepicker
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.TimePicker
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val timePicker = findViewById<TimePicker>(R.id.timePicker)
+
+        timePicker.setOnTimeChangedListener { view, hour, minute ->
+
+            Toast.makeText(
+                applicationContext,
+                "Hour : $hour Minute : $minute",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+
+
+========================================
+3. TIME PICKER WITH SPINNER MODE
+========================================
+
+Question:
+Create a TimePicker application in Spinner Mode and display the selected time using Toast message.
+
+
+-------------------------------
+activity_main.xml
+-------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<TimePicker xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:timePickerMode="spinner" />
+
+
+-------------------------------
+MainActivity.kt
+-------------------------------
+
+package com.example.timepicker
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.TimePicker
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val timePicker = findViewById<TimePicker>(R.id.timePicker)
+
+        timePicker.setOnTimeChangedListener { view, hour, minute ->
+
+            Toast.makeText(
+                applicationContext,
+                "Hour : $hour Minute : $minute",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+
+
+========================================
+4. TIME PICKER WITH CLOCK MODE
+========================================
+
+Question:
+Create a TimePicker application in Clock Mode and display the selected time using Toast message.
+
+
+-------------------------------
+activity_main.xml
+-------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<TimePicker xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:timePickerMode="clock" />
+
+
+-------------------------------
+MainActivity.kt
+-------------------------------
+
+package com.example.timepicker
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.TimePicker
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val timePicker = findViewById<TimePicker>(R.id.timePicker)
+
+        timePicker.setOnTimeChangedListener { view, hour, minute ->
+
+            Toast.makeText(
+                applicationContext,
+                "Hour : $hour Minute : $minute",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+
+
+========================================
+5. DATE PICKER USING TOAST MESSAGE
+========================================
+
+Question:
+Create a DatePicker application and display the selected date in Toast message format.
+
+
+-------------------------------
+activity_main.xml
+-------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+-------------------------------
+MainActivity.kt
+-------------------------------
+
+package com.example.datepicker1
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.DatePicker
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+
+        datePicker.setOnDateChangedListener { view, year, month, day ->
+
+            val m = month + 1
+
+            Toast.makeText(
+                applicationContext,
+                "Date Is: $day/$m/$year",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
