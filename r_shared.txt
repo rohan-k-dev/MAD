@@ -1,0 +1,335 @@
+1.This program stores username and password manually using SAVE, LOAD and DELETE buttons.
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/ed1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/ed2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/ed1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/ed2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/b2"/>
+
+    <Button
+        android:id="@+id/b2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOAD"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/ed2"
+        app:layout_constraintStart_toEndOf="@id/b1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/b4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/b1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+package com.example.shared_preferences
+
+import android.content.Context
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+        val name = findViewById<EditText>(R.id.ed1)
+        val password = findViewById<EditText>(R.id.ed2)
+
+        val save = findViewById<Button>(R.id.b1)
+        val load = findViewById<Button>(R.id.b2)
+        val del = findViewById<Button>(R.id.b4)
+
+        val sharedPref = getSharedPreferences(
+            "addName",
+            Context.MODE_PRIVATE
+        )
+
+        val edit = sharedPref.edit()
+
+        save.setOnClickListener {
+
+            edit.putString(
+                "name",
+                name.text.toString()
+            )
+
+            edit.putString(
+                "password",
+                password.text.toString()
+            )
+
+            edit.commit()
+
+            Toast.makeText(
+                this,
+                "Data Saved",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        load.setOnClickListener {
+
+            val getname = sharedPref.getString(
+                "name",
+                "default value"
+            )
+
+            val getpass = sharedPref.getString(
+                "password",
+                "default value"
+            )
+
+            Toast.makeText(
+                this,
+                getname + " " + getpass,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        del.setOnClickListener {
+
+            edit.clear()
+            edit.commit()
+
+            Toast.makeText(
+                this,
+                "Data Deleted",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+2.This program automatically saves data when app closes and restores it when app opens again.
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shared Preferences"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/edit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name"
+        android:layout_below="@id/textview"
+        android:layout_margin="20dp"/>
+
+    <EditText
+        android:id="@+id/edit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Age"
+        android:inputType="number"
+        android:layout_below="@id/edit1"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>
+
+
+
+package com.example.sharedpreferences1
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.EditText
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var name: EditText
+    private lateinit var age: EditText
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+        name = findViewById(R.id.edit1)
+        age = findViewById(R.id.edit2)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sh = getSharedPreferences(
+            "MySharedPref",
+            MODE_PRIVATE
+        )
+
+        val s1 = sh.getString("name", "")
+        val a = sh.getInt("age", 0)
+
+        name.setText(s1)
+        age.setText(a.toString())
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val sharedPreferences = getSharedPreferences(
+            "MySharedPref",
+            MODE_PRIVATE
+        )
+
+        val myEdit = sharedPreferences.edit()
+
+        myEdit.putString(
+            "name",
+            name.text.toString()
+        )
+
+        myEdit.putInt(
+            "age",
+            age.text.toString().toInt()
+        )
+
+        myEdit.apply()
+    }
+}
+
+
+
+
+
+
+3.This program simply stores and retrieves data using SharedPreferences and displays it using Toast.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SharedPreferences Example"
+        android:textSize="22sp"/>
+
+</LinearLayout>
+
+
+
+
+package com.example.sharedpreferences2
+
+import android.content.Context
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+        val sharedPref = getSharedPreferences(
+            "MyPref",
+            Context.MODE_PRIVATE
+        )
+
+        val editor = sharedPref.edit()
+
+        editor.putString("username", "Rohan")
+        editor.putInt("age", 21)
+
+        editor.apply()
+
+        val name = sharedPref.getString(
+            "username",
+            "No Name"
+        )
+
+        val age = sharedPref.getInt(
+            "age",
+            0
+        )
+
+        Toast.makeText(
+            this,
+            "$name $age",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+}
