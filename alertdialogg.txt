@@ -97,4 +97,3 @@ class MainActivity : AppCompatActivity() {
 
 
 
-Add warning.xml alsoo
