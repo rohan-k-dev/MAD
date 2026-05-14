@@ -1,0 +1,61 @@
+✅ 1. activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Day" />
+
+</LinearLayout>
+
+✅ MainActivity.kt
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val datePicker =
+            findViewById<DatePicker>(R.id.datePicker)
+
+        val button =
+            findViewById<Button>(R.id.button)
+
+        button.setOnClickListener {
+
+            val day = datePicker.dayOfMonth
+            val month = datePicker.month
+            val year = datePicker.year
+
+            val calendar = Calendar.getInstance()
+
+            calendar.set(year, month, day)
+
+            val dayOfWeek =
+                calendar.get(Calendar.DAY_OF_WEEK)
+
+            val result = if (
+                dayOfWeek == Calendar.SATURDAY ||
+                dayOfWeek == Calendar.SUNDAY
+            ) {
+                "Weekend"
+            } else {
+                "Weekday"
+            }
+
+            Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+        }
+    }
+}
