@@ -299,3 +299,82 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
+
+
+package com.example.foodcontextmenu
+
+import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    lateinit var listView: ListView
+
+    val foodItems = arrayOf(
+        "Pizza",
+        "Burger",
+        "Pasta",
+        "Sandwich",
+        "French Fries",
+        "Ice Cream"
+    )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        listView = findViewById(R.id.listView)
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            foodItems
+        )
+
+        listView.adapter = adapter
+
+        // Register context menu
+        registerForContextMenu(listView)
+    }
+
+    // Create Context Menu
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+
+        menu?.setHeaderTitle("Choose Option")
+
+        menu?.add(0, 1, 0, "Order")
+        menu?.add(0, 2, 0, "Add to Favourite")
+    }
+
+    // Handle Menu Item Clicks
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+
+            1 -> {
+                Toast.makeText(this, "Food Ordered", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            2 -> {
+                Toast.makeText(this, "Added to Favourite", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            else -> super.onContextItemSelected(item)
+        }
+    }
+}
