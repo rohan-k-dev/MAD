@@ -1,0 +1,437 @@
+===============================
+FRAGMENT PROGRAM (OLD VERSION)
+COMPLETE COPY PASTE CODE
+===============================
+
+
+-----------------------------------
+PROGRAM DESCRIPTION
+-----------------------------------
+
+Create an Android application using Fragments.
+
+The application contains:
+1. Fragment1
+2. Fragment2
+
+When the user clicks:
+• Fragment1 button → Blue Fragment opens
+• Fragment2 button → Yellow Fragment opens
+
+This program demonstrates:
+• Fragment creation
+• Fragment switching
+• FragmentContainerView
+• View Binding
+• Fragment transactions
+
+
+-----------------------------------
+FILES USED
+-----------------------------------
+
+1. activity_main.xml
+2. fragment_1.xml
+3. fragment_2.xml
+4. Fragment1.kt
+5. Fragment2.kt
+6. MainActivity.kt
+7. colors.xml
+8. build.gradle(Module : app)
+
+
+===================================
+STEP 1 : ENABLE VIEW BINDING
+===================================
+
+Open:
+
+Gradle Scripts
+→ build.gradle(Module : app)
+
+Inside android{ } add:
+
+
+buildFeatures{
+    viewBinding true
+}
+
+
+Example:
+
+android {
+
+    compileSdkVersion 34
+
+    defaultConfig {
+
+        applicationId "com.example.fragment"
+
+        minSdkVersion 21
+        targetSdkVersion 34
+
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+
+
+===================================
+STEP 2 : colors.xml
+===================================
+
+res
+→ values
+→ colors.xml
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="yellow">#FFEB3B</color>
+
+</resources>
+
+
+
+===================================
+STEP 3 : CREATE FRAGMENTS
+===================================
+
+Right Click java folder
+→ New
+→ Fragment
+→ Fragment (Blank)
+
+Create:
+
+1. Fragment1
+2. Fragment2
+
+Delete extra generated code.
+
+
+
+===================================
+FILE NAME : activity_main.xml
+===================================
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+
+    <androidx.fragment.app.FragmentContainerView
+
+        android:id="@+id/fragmentContainer"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+
+        android:layout_margin="10dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/bf1"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+
+        android:id="@+id/bf1"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Fragment1"
+
+        android:backgroundTint="@color/blue"
+
+        android:layout_marginBottom="40dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/bf2"/>
+
+
+    <Button
+
+        android:id="@+id/bf2"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Fragment2"
+
+        android:backgroundTint="@color/yellow"
+
+        android:layout_marginBottom="40dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toEndOf="@+id/bf1"
+
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+===================================
+FILE NAME : fragment_1.xml
+===================================
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    tools:context=".Fragment1">
+
+
+    <TextView
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+        android:text="Fragment1"
+
+        android:textSize="30sp"
+
+        android:textColor="@android:color/white"
+
+        android:gravity="center"
+
+        android:background="@color/blue"/>
+
+</FrameLayout>
+
+
+
+===================================
+FILE NAME : fragment_2.xml
+===================================
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    tools:context=".Fragment2">
+
+
+    <TextView
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+        android:text="Fragment2"
+
+        android:textSize="30sp"
+
+        android:textColor="@android:color/white"
+
+        android:gravity="center"
+
+        android:background="@color/yellow"/>
+
+</FrameLayout>
+
+
+
+===================================
+FILE NAME : Fragment1.kt
+===================================
+
+package com.example.fragment
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+class Fragment1 : Fragment() {
+
+    override fun onCreateView(
+
+        inflater: LayoutInflater,
+
+        container: ViewGroup?,
+
+        savedInstanceState: Bundle?
+
+    ): View? {
+
+        return inflater.inflate(
+            R.layout.fragment_1,
+            container,
+            false
+        )
+    }
+}
+
+
+
+===================================
+FILE NAME : Fragment2.kt
+===================================
+
+package com.example.fragment
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+class Fragment2 : Fragment() {
+
+    override fun onCreateView(
+
+        inflater: LayoutInflater,
+
+        container: ViewGroup?,
+
+        savedInstanceState: Bundle?
+
+    ): View? {
+
+        return inflater.inflate(
+            R.layout.fragment_2,
+            container,
+            false
+        )
+    }
+}
+
+
+
+===================================
+FILE NAME : MainActivity.kt
+===================================
+
+package com.example.fragment
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+
+import com.example.fragment.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var fragmentManager: FragmentManager
+
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        binding.bf1.setOnClickListener {
+
+            goToFragment(Fragment1())
+        }
+
+        binding.bf2.setOnClickListener {
+
+            goToFragment(Fragment2())
+        }
+    }
+
+    private fun goToFragment(fragment: Fragment){
+
+        fragmentManager = supportFragmentManager
+
+        fragmentManager.beginTransaction()
+
+            .replace(R.id.fragmentContainer, fragment)
+
+            .commit()
+    }
+}
+
+
+
+===================================
+FINAL OUTPUT
+===================================
+
+1. App opens
+
+2. Click Fragment1 button
+   → Blue Fragment opens
+
+3. Click Fragment2 button
+   → Yellow Fragment opens
+
+
+
+===================================
+IMPORTANT
+===================================
+
+Package name everywhere should be SAME.
+
+Example:
+
+package com.example.fragment
+
+If your package name is different,
+change it everywhere.
