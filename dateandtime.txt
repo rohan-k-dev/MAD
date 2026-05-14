@@ -34,12 +34,13 @@ activity_main.xml
 MainActivity.kt
 -------------------------------
 
-package com.example.datepicker1
+package com.example.date
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.DatePicker
 import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +51,11 @@ class MainActivity : AppCompatActivity() {
 
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
 
-        datePicker.setOnDateChangedListener { view, year, month, day ->
+        datePicker.init(
+            datePicker.year,
+            datePicker.month,
+            datePicker.dayOfMonth
+        ) { _, year, month, day ->
 
             val m = month + 1
 
@@ -262,7 +267,7 @@ activity_main.xml
 MainActivity.kt
 -------------------------------
 
-package com.example.datepicker1
+package com.example.date
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -278,7 +283,11 @@ class MainActivity : AppCompatActivity() {
 
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
 
-        datePicker.setOnDateChangedListener { view, year, month, day ->
+        datePicker.init(
+            datePicker.year,
+            datePicker.month,
+            datePicker.dayOfMonth
+        ) { _, year, month, day ->
 
             val m = month + 1
 
